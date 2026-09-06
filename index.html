@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Pulse Point</title><style>* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f7f4ef;
+  color: #17202a;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.topbar {
+  height: 74px;
+  border-bottom: 1px solid #ddd6cc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  background: #f7f4ef;
+}
+
+.brand { font-size: 25px; font-weight: bold; }
+.drop { color: #b4312b; margin-right: 9px; font-size: 22px; }
+.tag { font-family: monospace; font-size: 15px; font-weight: normal; color: #4d4b48; }
+
+nav { display: flex; align-items: center; gap: 16px; font-family: monospace; }
+nav a, nav span { color: #1f1f1d; text-decoration: none; }
+nav a { border: 1px solid #d8d0c6; padding: 11px 17px; border-radius: 4px; background: #fffdf9; }
+nav .nav-dark { background: #1e1e1c; color: white; }
+
+.center-page { min-height: calc(100vh - 74px); display: flex; align-items: flex-start; justify-content: center; padding-top: 66px; }
+
+.card {
+  border: 1px solid #ddd5ca;
+  background: #fffdfa;
+  border-radius: 7px;
+}
+
+.auth-card { width: 494px; padding: 42px 42px; }
+.register-card { width: 500px; }
+
+h1 { margin: 0 0 10px; font-size: 32px; }
+h2 { margin: 0; font-size: 26px; }
+.muted { color: #56524e; font-family: monospace; line-height: 1.5; }
+.center-text { text-align: center; }
+
+.tabs { display: flex; margin: 27px 0; }
+.tab {
+  width: 50%;
+  padding: 13px;
+  text-align: center;
+  border: 1px solid #d8d0c6;
+  background: #f8f5f0;
+  color: #1f1f1d;
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 15px;
+}
+.tab.active { background: #20201e; color: white; }
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  color: #4b4743;
+  font-family: monospace;
+}
+input, select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #d8d0c6;
+  border-radius: 4px;
+  background: #f9f6f1;
+  font-size: 16px;
+}
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.btn {
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  padding: 14px;
+  margin-top: 18px;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.dark { background: #20201e; color: white; }
+.admin-link { text-align: center; margin-top: 36px; font-family: monospace; }
+.admin-link a { color: #3f3c38; }
+
+.choose-page { max-width: 920px; margin: 85px auto; text-align: center; }
+.choose-page h1 { font-size: 36px; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 54px; }
+.choice-card {
+  text-align: left;
+  padding: 42px 32px;
+  background: #fffdfa;
+  border: 1px solid #ddd5ca;
+  border-radius: 7px;
+  text-decoration: none;
+  color: inherit;
+}
+.choice-card p { font-family: monospace; line-height: 1.55; color: #57534e; }
+.choice-card small, .eyebrow { font-family: monospace; color: #55514c; }
+.red { color: #b4312b; }
+.green { color: #176c61; }
+
+.form-page { width: 645px; margin: 24px auto 60px; }
+.back { font-family: monospace; color: #46413c; text-decoration: none; }
+.form-page h1 { margin-top: 28px; font-size: 34px; }
+.form-card { padding: 35px 32px; margin-top: 28px; }
+
+.blood-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.blood {
+  padding: 15px 5px;
+  background: #faf7f2;
+  border: 1px solid #d8d0c6;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.blood.selected { background: #20201e; color: white; }
+.small { font-size: 12px; }
+
+.switch-row { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.switch-row input { display: none; }
+.switch { width: 52px; height: 30px; background: #999; border-radius: 30px; position: relative; }
+.switch:after { content: ""; width: 22px; height: 22px; background: white; border-radius: 50%; position: absolute; top: 4px; left: 4px; }
+.switch-row input:checked + .switch { background: #267a6c; }
+.switch-row input:checked + .switch:after { left: 26px; }
+
+.dashboard { max-width: 1240px; margin: 42px auto 100px; }
+.dashboard h1 { font-size: 35px; }
+.intro { max-width: 650px; }
+.stats { display: flex; gap: 22px; margin: 36px 0 44px; }
+.stat { width: 165px; padding: 22px 24px; border: 1px solid #ddd5ca; background: #fffdfa; border-radius: 7px; }
+.stat strong { display: block; font-size: 28px; margin-bottom: 12px; }
+.stat span, .section-title span { font-family: monospace; color: #514d48; }
+
+.board-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; }
+.section-title { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd5ca; padding-bottom: 12px; }
+.list { margin-top: 15px; }
+.entry {
+  border: 1px solid #ddd5ca;
+  background: #fffdfa;
+  padding: 18px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+}
+.entry-top { display: flex; justify-content: space-between; gap: 10px; }
+.badge { font-family: monospace; font-size: 12px; padding: 5px 8px; border-radius: 12px; background: #e8f3ee; color: #176c61; }
+.emergency { background: #f8dddd; color: #a51f1f; }
+.entry p { margin: 8px 0 0; font-family: monospace; color: #55514c; line-height: 1.45; }
+.empty { font-family: monospace; color: #67615b; padding: 20px 5px; }
+
+.notice { padding: 14px 18px; margin: -18px 0 28px; border: 1px solid #b9d9d0; background: #edf8f4; border-radius: 6px; font-family: monospace; }
+.hidden { display: none; }
+
+.floating {
+  position: fixed;
+  right: 30px;
+  bottom: 25px;
+  background: #20201e;
+  color: white;
+  padding: 16px 25px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-family: monospace;
+  box-shadow: 0 5px 18px #bbb;
+}
+
+@media (max-width: 800px) {
+  .topbar { height: auto; padding: 18px 5%; flex-direction: column; align-items: flex-start; gap: 15px; }
+  nav { flex-wrap: wrap; }
+  .tag { display: block; margin-left: 30px; margin-top: 4px; }
+  .auth-card, .register-card { width: 92%; }
+  .choose-page, .dashboard, .form-page { width: 92%; margin: 45px auto; }
+  .choice-grid, .board-grid, .two { grid-template-columns: 1fr; }
+  .stats { flex-wrap: wrap; }
+  .stat { width: 145px; }
+}
+
+.page-view{display:none}.page-view.active{display:block}.clickable{cursor:pointer}
+</style></head><body><header class="topbar"><div class="brand"><span class="drop">♥</span> Pulse Point <span class="tag">– blood request & donor notification board</span></div><nav id="nav"></nav></header>
+<section id="login" class="page-view"><main class="center-page"><section class="card auth-card"><h1>Log in</h1><p class="muted">One account works for both requesting blood and offering to donate.</p><div class="tabs"><button class="tab active">Log in</button><button class="tab" onclick="show('register')">Register</button></div><form onsubmit="loginUser(event)"><label>Username</label><input id="loginName" required><label>Password</label><input id="loginPassword" type="password" required><button class="btn dark">Log in</button></form><p class="admin-link"><a href="#" onclick="show('admin');return false">System operator? Admin login</a></p></section></main></section>
+<section id="register" class="page-view"><main class="center-page"><section class="card auth-card"><h1>Create account</h1><p class="muted">One account works for both requesting blood and offering to donate.</p><div class="tabs"><button class="tab" onclick="show('login')">Log in</button><button class="tab active">Register</button></div><form onsubmit="registerUser(event)"><label>Full name</label><input id="fullName" required><div class="two"><div><label>Phone</label><input id="phone" required></div><div><label>Location / city</label><input id="city" required></div></div><label>Username</label><input id="regUser" required><label>Password</label><input id="regPass" type="password" required><button class="btn dark">Create account</button></form></section></main></section>
+<section id="choose" class="page-view"><main class="choose-page"><h1>What do you need to do?</h1><p class="muted center-text">Pick one – you can always come back and add the other later from the same account.</p><div class="choice-grid"><a class="choice-card" onclick="show('request')"><small>Patient side</small><h2 class="red">Request blood</h2><p>Post the blood group, units, and urgency you need. Donors will see it on the notification board.</p></a><a class="choice-card" onclick="show('donor')"><small>Donor side</small><h2 class="green">Enter donor details</h2><p>List your blood group, location, and availability. Patients will see you on the notification board.</p></a></div></main></section>
+<section id="request" class="page-view"><main class="form-page"><a class="back" href="#" onclick="show('choose');return false">← back</a><h1>Request blood</h1><p class="muted">This will post to the shared notification board where donors can see it.</p><section class="card form-card"><form onsubmit="postRequest(event)"><label>Blood group needed</label><div id="requestGroupWrap" class="blood-grid"><button type="button" class="blood" data-group="O-" onclick="selectBlood(this,'requestGroup')">O-</button><button type="button" class="blood" data-group="O+" onclick="selectBlood(this,'requestGroup')">O+</button><button type="button" class="blood" data-group="A-" onclick="selectBlood(this,'requestGroup')">A-</button><button type="button" class="blood" data-group="A+" onclick="selectBlood(this,'requestGroup')">A+</button><button type="button" class="blood" data-group="B-" onclick="selectBlood(this,'requestGroup')">B-</button><button type="button" class="blood" data-group="B+" onclick="selectBlood(this,'requestGroup')">B+</button><button type="button" class="blood" data-group="AB-" onclick="selectBlood(this,'requestGroup')">AB-</button><button type="button" class="blood" data-group="AB+" onclick="selectBlood(this,'requestGroup')">AB+</button></div><input id="requestGroup" type="hidden"><div class="two"><div><label>Units needed</label><input id="units" type="number" min="1" required></div><div><label>Hospital / location</label><input id="hospital" required></div></div><label>Urgency</label><select id="urgency"><option>Routine</option><option>Urgent</option><option>Emergency</option></select><button class="btn dark">Post request</button></form></section></main></section>
+<section id="donor" class="page-view"><main class="form-page"><a class="back" href="#" onclick="show('choose');return false">← back</a><h1>Enter donor details</h1><p class="muted">This will post to the shared notification board where patients can see you.</p><section class="card form-card"><form onsubmit="saveDonor(event)"><label>Your blood group</label><div id="donorGroupWrap" class="blood-grid"><button type="button" class="blood" data-group="O-" onclick="selectBlood(this,'donorGroup')">O-</button><button type="button" class="blood" data-group="O+" onclick="selectBlood(this,'donorGroup')">O+</button><button type="button" class="blood" data-group="A-" onclick="selectBlood(this,'donorGroup')">A-</button><button type="button" class="blood" data-group="A+" onclick="selectBlood(this,'donorGroup')">A+</button><button type="button" class="blood" data-group="B-" onclick="selectBlood(this,'donorGroup')">B-</button><button type="button" class="blood" data-group="B+" onclick="selectBlood(this,'donorGroup')">B+</button><button type="button" class="blood" data-group="AB-" onclick="selectBlood(this,'donorGroup')">AB-</button><button type="button" class="blood" data-group="AB+" onclick="selectBlood(this,'donorGroup')">AB+</button></div><input id="donorGroup" type="hidden"><label>Location / city</label><input id="donorCity" required><label>Last donation date <span class="small">(leave blank if never)</span></label><input id="lastDonation" type="date"><label class="switch-row"><input id="available" type="checkbox" checked><span class="switch"></span>Available to donate</label><button class="btn dark">Save donor details</button></form></section></main></section>
+<section id="dashboard" class="page-view"><main class="dashboard"><p class="eyebrow">Shared notification board</p><h1>Requests & donors, side by side</h1><p class="muted intro">Every patient request notifies matching donors here, and every donor's availability notifies matching patients. Both sides watch the same board.</p><div class="stats"><div class="stat"><strong id="requestCount">0</strong><span>open requests</span></div><div class="stat"><strong id="donorCount">0</strong><span>available donors</span></div><div class="stat"><strong id="matchCount">0</strong><span>requests with a match</span></div></div><div id="noticeBox" class="notice hidden">🔔 Match notification: a compatible blood request or donor is available.</div><div class="board-grid"><section><div class="section-title"><h2>Patient requests</h2><span id="requestTotal">0 total</span></div><div id="requestsList" class="list"></div></section><section><div class="section-title"><h2>Available donors</h2><span id="donorTotal">0 total</span></div><div id="donorsList" class="list"></div></section></div></main><a class="floating" onclick="show('choose')">+ New entry</a></section>
+<section id="admin" class="page-view"><main class="center-page"><section class="card auth-card"><h1>Admin login</h1><p class="muted">System operator access.</p><form onsubmit="adminLogin(event)"><label>Admin username</label><input id="adminUser" required><label>Password</label><input id="adminPass" type="password" required><button class="btn dark">Admin login</button></form><p class="admin-link"><a href="#" onclick="show('login');return false">← Back to user login</a></p></section></main></section>
+<script>const state={user:JSON.parse(localStorage.getItem('pp_user')||'null'),users:JSON.parse(localStorage.getItem('pp_users')||'[]'),requests:JSON.parse(localStorage.getItem('pp_requests')||'[]'),donors:JSON.parse(localStorage.getItem('pp_donors')||'[]')};
+function save(){localStorage.setItem('pp_user',JSON.stringify(state.user));localStorage.setItem('pp_users',JSON.stringify(state.users));localStorage.setItem('pp_requests',JSON.stringify(state.requests));localStorage.setItem('pp_donors',JSON.stringify(state.donors));}
+function show(id){document.querySelectorAll('.page-view').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');updateNav();if(id==='dashboard')renderDashboard();}
+function updateNav(){const n=document.getElementById('nav');if(!state.user){n.innerHTML='';return}n.innerHTML=`<span>Hi, <b>${state.user.name}</b></span><button onclick="show('dashboard')">Dashboard</button><button class="nav-dark" onclick="show('choose')">New entry</button><button onclick="logout()">Log out</button>`;}
+function logout(){state.user=null;save();show('login');}
+function selectBlood(btn,id){document.querySelectorAll('#'+id+'Wrap .blood').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');document.getElementById(id).value=btn.dataset.group;}
+function registerUser(e){e.preventDefault();const u={name:fullName.value.trim(),phone:phone.value.trim(),city:city.value.trim(),username:regUser.value.trim(),password:regPass.value};if(state.users.some(x=>x.username===u.username)){alert('Username already exists.');return}state.users.push(u);state.user=u;save();alert('Account created successfully!');show('choose');}
+function loginUser(e){e.preventDefault();const u=state.users.find(x=>x.username===loginName.value.trim()&&x.password===loginPassword.value);if(!u){alert('Invalid username or password.');return}state.user=u;save();show('choose');}
+function postRequest(e){e.preventDefault();if(!requestGroup.value){alert('Please select a blood group.');return}state.requests.push({id:Date.now(),username:state.user.username,name:state.user.name,group:requestGroup.value,units:units.value,hospital:hospital.value,urgency:urgency.value});save();alert('Blood request posted!');show('dashboard');}
+function saveDonor(e){e.preventDefault();if(!donorGroup.value){alert('Please select your blood group.');return}state.donors=state.donors.filter(x=>x.username!==state.user.username);state.donors.push({id:Date.now(),username:state.user.username,name:state.user.name,group:donorGroup.value,city:donorCity.value,last:lastDonation.value,available:available.checked});save();alert('Donor details saved!');show('dashboard');}
+function renderDashboard(){const rs=state.requests,ds=state.donors.filter(d=>d.available);requestCount.textContent=rs.length;donorCount.textContent=ds.length;matchCount.textContent=rs.filter(r=>ds.some(d=>d.group===r.group)).length;requestTotal.textContent=rs.length+' total';donorTotal.textContent=ds.length+' total';requestsList.innerHTML=rs.length?rs.map(r=>{const m=ds.some(d=>d.group===r.group);return `<article class="entry"><div class="entry-top"><strong>${r.group} · ${r.units} unit(s)</strong><span class="badge ${r.urgency==='Emergency'?'emergency':''}">${r.urgency}</span></div><p>${r.hospital} · ${r.name}${r.username===state.user.username?' · Your request':''}</p>${m?'<span class="badge">Donor available</span>':''}</article>`}).join(''):'<div class="empty">No open requests – a posted request will notify matching donors here.</div>';donorsList.innerHTML=ds.length?ds.map(d=>{const m=rs.some(r=>r.group===d.group);return `<article class="entry"><div class="entry-top"><strong>${d.group} · ${d.name}</strong>${d.username===state.user.username?'<span class="badge">Your entry</span>':''}</div><p>${d.city}</p>${m?'<span class="badge">Patient waiting</span>':''}</article>`}).join(''):'<div class="empty">No available donors listed – a donor entry will notify matching patients here.</div>';const mineR=rs.some(r=>r.username===state.user.username&&ds.some(d=>d.group===r.group));const mineD=ds.some(d=>d.username===state.user.username&&rs.some(r=>r.group===d.group));noticeBox.classList.toggle('hidden',!(mineR||mineD));}
+function adminLogin(e){e.preventDefault();if(adminUser.value==='admin'&&adminPass.value==='admin123')alert('Admin login successful.');else alert('Demo admin: admin / admin123');}
+updateNav();show(state.user?'dashboard':'login');</script></body></html>
